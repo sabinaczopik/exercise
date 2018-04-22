@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 
 from browser import Browser
+from data import UserData
 
 
 class Login(Browser):
@@ -9,18 +10,19 @@ class Login(Browser):
         'primary_btn': (By.CSS_SELECTOR, '[class="primaryBtn"]'),
         'error_msg': (By.CSS_SELECTOR, '[class="error"]'),
     }
+    user = UserData()
 
     def enter_password(self, password):
         if password == 'correct':
-            self.input_password.send_keys('pe2irb9D')
+            self.input_password.send_keys(self.user.correct_user_password)
         elif password == 'incorrect':
-            self.input_password.send_keys('!@#$%^&*()1285')
+            self.input_password.send_keys(self.user.incorrect_user_password)
 
     def submit_password(self):
         self.primary_btn.click()
 
     def login_to_service(self):
-        self.open_page('https://qarecruitment.egnyte.com/fl/ZlhEpCQ89o')
+        self.open_page(self.user.shered_link)
         self.enter_password('correct')
         self.submit_password()
 
@@ -40,10 +42,6 @@ class TopBar(Browser):
             '.select-all-items .inner-wrapper'
         ),
         'download_btn': (By.CSS_SELECTOR, 'button.is-type-selected'),
-        'chrome_download_link': (
-            By.CSS_SELECTOR,
-            'href="https://qarecruitment.egnyte.com/publicFolderDownload'
-        )
     }
 
     def open_sort_menu(self):
@@ -73,6 +71,9 @@ class TopBar(Browser):
         elif data_order == "Descending":
             assert sorted(lower_case_attribute, reverse=False) == lower_case_attribute
 
-    def confirm_download(self):
-        self.open_page('chrome://downloads')
-        self.chrome_download_link
+
+class FolderItem(Browser):
+    locator_dictionary = {
+        'preview_icon': (By.CSS_SELECTOR, '.trigger-preview'),
+        'files_preview': (By.CSS_SELECTOR, '[class="preview"]'),
+    }

@@ -1,11 +1,13 @@
 import time
 
 from behave import *
+from data import UserData
 
 
 @given('the main page is open')
 def step_impl(context):
-    context.browser.open_page('https://qarecruitment.egnyte.com/fl/ZlhEpCQ89o')
+    user = UserData()
+    context.browser.open_page(user.shered_link)
 
 
 @when('I enter "{variety}" password')
@@ -43,22 +45,16 @@ def step_impl(context, data_order):
     context.top_bar.choose_data_order(data_order)
 
 
-@then('Then the elemnts are sorted by "{data_order}}" name')
+@then('the elements are sorted by "{data_order}" name')
 def step_impl(context, data_order):
     context.top_bar.sort_elements(data_order)
 
 
-@when('I select current folder')
+@when('I choose preview selected files')
 def step_impl(context):
-    context.top_bar.select_all_checkbox.click()
+    context.folder_item.preview_icon.click()
 
 
-@when('I click on submit download button')
+@then('the I see preview')
 def step_impl(context):
-    context.top_bar.download_btn.click()
-    time.sleep(5)
-
-
-@then('the current folder is dwonloaded')
-def step_impl(context):
-    context.top_bar.confirm_download()
+    context.folder_item.files_preview

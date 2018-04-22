@@ -7,6 +7,7 @@ def before_all(context):
     context.browser = Browser()
     context.login_page = pages.Login()
     context.top_bar = pages.TopBar()
+    context.folder_item = pages.FolderItem()
 
 
 def after_scenario(context, scenario):

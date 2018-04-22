@@ -4,7 +4,6 @@ import re
 import time
 
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -15,8 +14,7 @@ class Browser(object):
     options = webdriver.ChromeOptions()
     options.add_argument('headless')
     options.add_argument('window-size=1800x6000')
-    # driver = webdriver.Chrome(chrome_options=options)
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(chrome_options=options)
 
     def __getattr__(self, k):
         if k in self.locator_dictionary:
