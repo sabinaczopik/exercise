@@ -15,7 +15,7 @@ def step_impl(context, variety):
     context.login_page.enter_password(variety)
 
 
-@when('I submit it')
+@when('I submit button')
 def step_impl(context):
     context.login_page.primary_btn.click()
 
@@ -45,7 +45,7 @@ def step_impl(context, data_order):
     context.top_bar.choose_data_order(data_order)
 
 
-@then('the elements are sorted by "{data_order}" name')
+@then('elements are sorted by "{data_order}" name')
 def step_impl(context, data_order):
     context.top_bar.sort_elements(data_order)
 
@@ -55,6 +55,6 @@ def step_impl(context):
     context.folder_item.preview_icon.click()
 
 
-@then('the I see preview')
+@then('I see preview')
 def step_impl(context):
     context.folder_item.files_preview
